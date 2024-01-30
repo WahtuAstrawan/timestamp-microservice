@@ -38,13 +38,15 @@ app.get("/api/:date", function (req, res) {
   try {
     if (isNum(date)) {
       dateObj = new Date(parseInt(date));
-    }else if(!isNum(date)){
+    } else {
       dateObj = new Date(date);
-    }else{
+    }
+
+    if (isNaN(dateObj.getTime())) {
       throw new Error("Invalid Date");
     }
   } catch (error) {
-    return res.json({error: "Invalid Date"});
+    return res.json({ error: "Invalid Date" });
   }
 
   unix = dateObj.getTime();
